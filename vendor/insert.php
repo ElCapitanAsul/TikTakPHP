@@ -36,7 +36,7 @@ if (isset($_POST['fname']) &&
 	} else {
 	    echo json_encode([
 	    	'status' => 'error',
-	    	'message' => $sql . "<br>" . $conn->error
+	    	'message' =>  $conn->error
 	    ]);
 	}
 

@@ -1,18 +1,15 @@
 <?php 
-$servername = "localhost";
-$dbusername = "root";
-$dbpassword = "";
-$dbname = "tiktak";
+include('../dbconfig.php');
 
 if (isset($_POST['fname']) && 
-	($_POST['lname']) && 
-	($_POST['email']) && 
-	($_POST['password']) && 
-	($_POST['rating']) && 
-	($_POST['comment']) && 
-	($_POST['latitude']) && 
-	($_POST['longitude']) && 
-	($_POST['image'])) {
+	isset($_POST['lname']) && 
+	isset($_POST['email']) && 
+	isset($_POST['password']) && 
+	isset($_POST['rating']) && 
+	isset($_POST['comment']) && 
+	isset($_POST['latitude']) && 
+	isset($_POST['longitude']) && 
+	isset($_POST['image'])) {
 
 
 	$fname = $_POST['fname'];
@@ -25,9 +22,6 @@ if (isset($_POST['fname']) &&
 	$longitude = $_POST['longitude'];
 	$image = $_POST['image'];
 
-
-	$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
-
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	}
@@ -35,12 +29,21 @@ if (isset($_POST['fname']) &&
 	$sql = "INSERT INTO customers (fname, lname, email, password, rating, comment, latitude, longitude, image) VALUES ('$fname', '$lname', '$email', '$password', '$rating', '$comment', '$latitude', '$longitude', '$image')";
 
 	if ($conn->query($sql) === TRUE) {
-	    echo "New record created successfully";
+	    echo json_encode([
+	    	'status' => 'success', 
+	    	'message' => 'Record inserted successfully'
+	    ]);
 	} else {
-	    echo "Error: " . $sql . "<br>" . $conn->error;
-
+	    echo json_encode([
+	    	'status' => 'error',
+	    	'message' =>  $conn->error
+	    ]);
 	}
 
 	$conn->close();
-}	
-?>
+}else{
+	echo json_encode([
+		'status' => 'error', 
+		'message' => 'Please include all required fields'
+	]);
+}

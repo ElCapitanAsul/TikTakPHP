@@ -1,8 +1,5 @@
 <?php 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "tiktak";
+require('dbconfig.php');
 
 if (isset($_POST['id'])) {
 
