@@ -5,7 +5,7 @@ if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT fname, lname, email, password, rating, comment, latitude, longitude, image FROM vendors";
+$sql = "SELECT fname, lname, email, rating, image FROM vendors";
 $result = $conn->query($sql);
 
 
