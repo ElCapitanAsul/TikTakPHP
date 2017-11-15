@@ -1,9 +1,15 @@
 <?php 
 include('../dbconfig.php');
 
-if(!isset($_POST['email']) ||!isset($_POST['password'])){
+echo json_encode([
+	'status' => 'error',
+	'message' => 'data: ' .  $_POST['email'] . ' ' . $_POST['password']
+]);
+return;
+
+if(!isset($_POST['email']) || !isset($_POST['password'])){
 	echo json_encode([
-		'status' => 'error',
+		'status' => 'error', 
 		'message' => 'incomplete fields'
 	]);
 	return;
