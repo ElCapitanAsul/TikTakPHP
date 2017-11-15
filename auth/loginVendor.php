@@ -24,11 +24,15 @@ $result = mysqli_fetch_all($result,MYSQLI_ASSOC);
 // echo json_encode($result);
 if(count($result) > 0){
 	echo json_encode([
-		'status' => 1
+		'status' => 'success', 
+		'data' => 1,
+		'message' => 'User found'
 	]);
 }else {
 	echo json_encode([
-		'status' => 0
+		'status' => 'success', 
+		'data' => 0,
+		'message' => 'User not found'
 	]);
 }
 
