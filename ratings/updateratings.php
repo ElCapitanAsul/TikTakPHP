@@ -1,9 +1,5 @@
 <?php 
-$servername = "localhost";
-$dbusername = "root";
-$dbpassword = "";
-$dbname = "tiktak";
-
+include('../dbconfig.php');
 if (isset ($_POST['id']) &&
 	($_POST['rate_by']) && 
 	($_POST['rate_count']) && 

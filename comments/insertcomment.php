@@ -1,8 +1,5 @@
 <?php 
-$servername = "localhost";
-$dbusername = "root";
-$dbpassword = "";
-$dbname = "tiktak";
+include('../dbconfig.php');
 
 if (isset($_POST['comment_by']) && 
 	($_POST['reply_to']) && 
