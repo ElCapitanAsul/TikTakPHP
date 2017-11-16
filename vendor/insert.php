@@ -51,6 +51,7 @@ include('../dbconfig.php');
 			if ($conn->query($sql) === TRUE) {
 				echo json_encode([
 					'status' => 'success', 
+					'vendor_id' => $last_id,
 					'message' => 'Record inserted successfully'
 				]);
 			} else {

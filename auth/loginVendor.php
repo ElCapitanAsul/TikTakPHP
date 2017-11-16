@@ -22,10 +22,13 @@ $result = $conn->query($sql);
 
 $result = mysqli_fetch_all($result,MYSQLI_ASSOC);
 // echo json_encode($result);
+// var_dump($result);
+// return;
 if(count($result) > 0){
 	echo json_encode([
 		'status' => 'success', 
 		'data' => 1,
+		'vendor_id' => $result[0]['id'],
 		'message' => 'User found'
 	]);
 }else {
