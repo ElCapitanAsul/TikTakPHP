@@ -11,7 +11,10 @@ include('../dbconfig.php');
 		$lname = $_POST['lname'];
 		$email = $_POST['email'];
 		$password = $_POST['password'];
-		
+		$services = $_POST['services'];
+
+		echo json_encode($services);
+		return;
 		
 		if ($conn->connect_error) {
 			// die("Connection failed: " . $conn->connect_error);
@@ -21,19 +24,19 @@ include('../dbconfig.php');
 			]);
 		}
 
-		$sql = "INSERT INTO vendors (fname, lname, email, password) VALUES ('$fname', '$lname', '$email', '$password')";
+		// $sql = "INSERT INTO vendors (fname, lname, email, password) VALUES ('$fname', '$lname', '$email', '$password')";
 
-		if ($conn->query($sql) === TRUE) {
-		    echo json_encode([
-		    	'status' => 'success', 
-		    	'message' => 'Record inserted successfully'
-		    ]);
-		} else {
-		    echo json_encode([
-		    	'status' => 'error',
-		    	'message' =>  $conn->error
-		    ]);
-		}
+		// if ($conn->query($sql) === TRUE) {
+		//     echo json_encode([
+		//     	'status' => 'success', 
+		//     	'message' => 'Record inserted successfully'
+		//     ]);
+		// } else {
+		//     echo json_encode([
+		//     	'status' => 'error',
+		//     	'message' =>  $conn->error
+		//     ]);
+		// }
 
 		$conn->close();
 	}else{
