@@ -12,13 +12,18 @@ include('../dbconfig.php');
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 		$services = $_POST['services'];
+
 		$services = json_decode($services);
-		$array = [];
-		foreach ($services as $service) {
-			$array[] = $service['id'] . ' ' . $service['name'];
-		}
-		echo json_encode($array);
-		return;
+		// $array = [];
+		// foreach ($services as $service) {
+		// 	$array[] = $service->id . ' ' . $service->name;
+		// }
+		// echo '<pre>';
+		// print_r($services);
+		// echo '</pre>';
+
+		// echo json_encode($array);
+		// return;
 		
 		if ($conn->connect_error) {
 			// die("Connection failed: " . $conn->connect_error);
@@ -28,19 +33,38 @@ include('../dbconfig.php');
 			]);
 		}
 
-		// $sql = "INSERT INTO vendors (fname, lname, email, password) VALUES ('$fname', '$lname', '$email', '$password')";
+		$sql = "INSERT INTO vendors (fname, lname, email, password) VALUES ('$fname', '$lname', '$email', '$password')";
 
-		// if ($conn->query($sql) === TRUE) {
-		//     echo json_encode([
-		//     	'status' => 'success', 
-		//     	'message' => 'Record inserted successfully'
-		//     ]);
-		// } else {
-		//     echo json_encode([
-		//     	'status' => 'error',
-		//     	'message' =>  $conn->error
-		//     ]);
-		// }
+		if ($conn->query($sql) === TRUE) {
+		    $last_id = $conn->insert_id;
+		    
+		    $value = [];
+		    foreach ($services as $service) {
+		    	$value[] = '(' . $last_id . ', ' . $service->id . ')';
+		    }
+
+			$values = implode(",", $value);
+
+			$sql = " INSERT INTO vendors_services ( vend_id, service_id ) VALUES " . $values;
+
+			if ($conn->query($sql) === TRUE) {
+				echo json_encode([
+					'status' => 'success', 
+					'message' => 'Record inserted successfully'
+				]);
+			} else {
+		    echo json_encode([
+		    	'status' => 'error',
+		    	'message' =>  $conn->error
+		    ]);
+		}
+
+		} else {
+		    echo json_encode([
+		    	'status' => 'error',
+		    	'message' =>  $conn->error
+		    ]);
+		}
 
 		$conn->close();
 	}else{
