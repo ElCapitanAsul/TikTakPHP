@@ -40,6 +40,7 @@ include('../dbconfig.php');
 		    
 		    $value = [];
 		    foreach ($services as $service) {
+		    	if(isset($service->isChecked) && $service->isChecked == true)
 		    	$value[] = '(' . $last_id . ', ' . $service->id . ')';
 		    }
 
