@@ -5,7 +5,7 @@
 		die("Connection failed: " . $conn->connect_error);
 	}
 
-	$sql = "SELECT name FROM services";
+	$sql = "SELECT id, name FROM services";
 	$result = $conn->query($sql);
 
 
