@@ -13,7 +13,12 @@ include('../dbconfig.php');
 		$password = $_POST['password'];
 		$services = $_POST['services'];
 
-		echo json_encode($services);
+		// echo json_encode($services);
+		$array = [];
+		foreach ($services as $service) {
+			$array[] = $service['id'] . ' ' . $service['name'];
+		}
+		echo json_encode($array);
 		return;
 		
 		if ($conn->connect_error) {
