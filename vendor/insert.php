@@ -12,8 +12,7 @@ include('../dbconfig.php');
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 		$services = $_POST['services'];
-
-		// echo json_encode($services);
+		$services = json_decode($services);
 		$array = [];
 		foreach ($services as $service) {
 			$array[] = $service['id'] . ' ' . $service['name'];
